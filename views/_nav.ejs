@@ -1,0 +1,48 @@
+<!-- nav -->
+<div class="header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5">
+				<!-- Logo -->
+				<div class="logo">
+					<h1><a href="/index">Express Administrator</a></h1>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="row">
+					<div class="col-lg-12">
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="navbar navbar-inverse" role="banner">
+					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<% if(user) { %>
+										<%= user.displayName %> <b class="caret"></b>
+									<% }else{ %>
+										Account <b class="caret"></b>
+									<% } %>
+								</a>
+								<ul class="dropdown-menu animated fadeInUp">
+									<% if (!user) { %>
+										<li><a href="/loginapi">Login</a></li>
+									<% } else { %>
+									<% if(user.role=='admin') { %>
+										<li><a href="/admin">Admin</a></li>
+									<% } %>
+									<li><a href="/Profile">Profile</a></li>
+									<li><a href="/logout">Logout</a></li>
+									<% } %>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

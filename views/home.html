@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<% include _head %>
+</head>
+
+<body>
+	<% include _nav %>
+		<main role="main">
+			<section class="jumbotron text-center">
+				<div class="container">
+					<h1 class="jumbotron-heading">MO Administrator</h1>
+					<% if (!user) { %>
+						<p class="lead text-muted">Welcome! Please <a href="/loginapi">log in</a>.</p>
+						<p>
+							<a href="/loginapi" class="btn btn-primary">Login</a>
+						</p>
+						<% } else { %>
+							<p class="lead text-muted">Hello,
+								<%= user.username %>. View your <a href="/profile">profile</a>.</p>
+							<h4>View index <a href="/account">MO-Dashbroad</a>.</h4>
+							<p>
+								<a href="/account" class="btn btn-primary">MO-Dashbroad</a>
+								<a href="/profile" class="btn btn-secondary">Profile</a>
+							</p>
+							<% } %>
+				</div>
+			</section>
+			<div class="container">
+				<!-- Example row of columns -->
+				<!-- <div class="row">
+					<div class="col-md-4" style="text-align: center;">
+						<img src="images/cloud.png" style="height: 100px;">
+						<h2>Admin UI</h2>
+						<p style="font-size: 16px;">Created by modern web apps, Nodejs, and APIs using HTTP. </p>
+						<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+					</div>
+					<div class="col-md-4" style="text-align: center;">
+						<img src="images/rocket.png" style="height: 100px;">
+						<h2>Fast</h2>
+						<p style="font-size: 16px;">Nearly 100x faster than popular web frameworks using Ruby and PHP. MO-Admin is fast by every meaning of the word</p>
+						<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+					</div>
+					<div class="col-md-4" style="text-align: center;">
+						<img src="images/graph.png" style="height: 100px;">
+						<h2>Extensible</h2>
+						<p style="font-size: 16px;">With middleware and React extensions, you can add custom functionality to MO that feels native</p>
+						<p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+					</div>
+				</div> -->
+				<hr>
+			</div>
+		</main>
+
+		<% include _footer %>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include _head %>
+	</head>
+	<body>
+		<% include _nav %>
+		<div class="page-content">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="sidebar content-box" style="display: block;">
+						<ul class="nav">
+							<!-- Main menu -->
+							<li><a href="/account"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+							<li><a href="/home"><i class="glyphicon glyphicon-record"></i> Homepage</a></li>
+							<li><a href="/admin"><i class="glyphicon glyphicon-stats"></i> User manager</a></li>
+							<li><a href="/admin/roles"><i class="glyphicon glyphicon-tasks"></i> Roles manager</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<div class="content-box-large">
+						<div class="panel-heading">
+							<div class="panel-title">
+								<a href="/admin/log">Logger Management table</a>
+							</div>
+							<% if(message) {%>
+								<p><%= message %> </p>
+							<% } %>
+						</div>
+						<div class="panel-body">
+							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+								<thead>
+									<tr>
+										<th>STT</th>
+										<th>Date</th>
+										<th>File Name</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% for(var i=0; i < log.length; i++) { %>
+									<tr>
+										<td><%= i+1 %></td>
+										<td>
+											<a href="/admin/log/<%= log[i].file %>">
+												<%= log[i].date %>
+											</a>
+										</td>
+										<td><%= log[i].file %></td>
+									</tr>
+									<% } %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% include _footer %>
+	</body>
+</html>

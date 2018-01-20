@@ -1,0 +1,364 @@
+html {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 15px;
+}
+
+table {
+	font-size: 14px;
+}
+
+#header h1{
+	line-height: 50px !important;
+	font-size: 35px !important;
+	margin: 0;
+}
+#menu li.selected {
+	background: #555;
+}
+#menu {
+	position: relative;
+	font-size: 14px;
+}
+#menu .download-box {
+	position: absolute;
+	right: 5px;
+	border: 1px solid #eee;
+	border-radius: 5px;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+}
+#menu .download-box ul{
+	padding: 10px 0;
+	margin: 0;
+}
+#menu .download-box i.fa-caret-up{
+	position: absolute;
+	right: 7px;
+	top: -15px;
+	font-size: 22px;
+}
+#menu .download-box ul li{
+	border-bottom: 1px solid #eee;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 20px;
+}
+#menu .download-box ul li a{
+	line-height: 30px;
+	font-size: 14px;
+	text-decoration: none;
+	display: block;
+}
+#menu .download-box ul li:hover{
+	background: #eee;
+}
+#mainContent {
+	padding: 10px;
+	position: relative;
+}
+#mainContent .loading {
+	text-align: center;
+}
+#mainContent .loading i{
+	font-size: 20px;
+	line-height: 40px;
+}
+#mainContent .config-content {
+	padding-top: 20px;
+}
+.search-box {
+	padding: 30px 0;
+	text-align: center;
+	position: relative;
+}
+.search-box button {
+	border-radius: 0 4px 4px 0;
+}
+.search-box input {
+	border-radius: 4px 0 0 4px;
+}
+.search-box i.fa-spinner {
+	font-size: 25px;
+}
+.search-box input{
+	width: 350px !important;
+}
+.search-box .add {
+	position: absolute;
+	right: 0;
+	top: 30px;
+}
+.search-result .title{
+	height: 30px;
+	line-height: 30px;
+	background: #eee;
+	padding-left: 5px;
+	font-weight: bold;
+	clear: both;
+}
+.search-result .delete-room {
+	text-align: right;
+	padding-bottom: 20px;
+}
+.search-result button {
+	width: 100px;
+}
+#mainContent i.fa-cog{
+	position: absolute;
+	right: 50px;
+	top: 40px;
+	color: #777;
+	font-size: 30px;
+	cursor: pointer;
+	z-index: 9;
+}
+#mainContent .config-box {
+	box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+	width: 400px;
+	background: #eee;
+	position: absolute;
+	right: 10px;
+	top: 90px;
+	padding: 20px;
+	padding-top: 10px;
+	text-align: center;
+	border-radius: 5px;
+}
+#mainContent .add {
+	text-align: right;
+	padding-top: 8px;
+	height: 50px;
+	width: 80%;
+}
+#mainContent .add i{
+	font-size: 30px;
+	color: green;
+	cursor: pointer;
+	line-height: 40px;
+}
+.config-box .fa-sort-asc {
+	position: absolute;
+	right: 45px;
+	top: -10px;
+	font-size: 25px;
+	color: #eee;
+}
+.config-box textarea {
+	width: 100%;
+    border-color: #ccc;
+    margin: 10px 0;
+    height: 70px;
+}
+.config-box button {
+	margin-top: 20px;
+}
+.config-box .error {
+	color: red;
+	padding: 10px;
+	margin: 0;
+}
+table.acc-info {
+	width: 60%;
+	float: left;
+}
+table.rates {
+	width: 60%;
+	margin: auto;
+}
+table.acc-more-info {
+	width: 38%;
+	float: right;
+	margin-top: 20px;
+}
+table.acc-more-info td{
+	padding: 10px;
+	border-top: none !important;
+}
+table.config {
+	width: 60%;
+	margin: auto;
+	padding-top: 20px;
+}
+table.acc-info td.value, table.config td.value {
+	padding: 0 8px !important;
+	height: 40px;
+	line-height: 38px !important;
+	width: 200px;
+}
+table.acc-info td input, table.config td input{
+	float: right;
+	width: 180px;
+	margin-top: 2px;
+}
+table.pools {
+	width: 100%;
+	padding-top: 20px !important;
+}
+
+table.secinfo {
+	width: 20%;
+	margin: auto;
+}
+table.acc-secs {
+	padding-top: 20px;
+}
+table.rules {
+	width: 60%;
+	margin: auto;
+	margin-top: 20px;
+}
+table th {
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 15px 0;
+}
+td.numbAlign {
+	text-align: right;
+}
+td.action {
+	text-align: center;
+	width: 100px;
+}
+td.action i{
+	font-size: 20px;
+	cursor: pointer;
+}
+td.action i.fa-trash{
+	color: red;
+}
+td.action i.fa-pencil-square-o {
+	color: green;
+	padding-right: 5px;
+}
+td.action i.fa-check {
+	color: green;
+	padding-right: 5px;
+}
+.ReactModalPortal h3 {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+.ReactModalPortal .fa-times {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	font-size: 20px;
+	cursor: pointer;
+	color: #777;
+}
+.ReactModalPortal .content {
+	padding-top: 20px;
+}
+.ReactModalPortal .content .form-group {
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+.rules-box {
+	background: #eee;
+	border-radius: 5px;
+	padding: 20px;
+}
+.rules-box .search-box{
+	padding: 10px 0;
+}
+.rules-box .title{
+	font-weight: bold;
+	padding-right: 10px;
+}
+.monitors {
+	width: 400px;
+	margin: auto;
+	padding-top: 20px;
+}
+.monitors .monitor {
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+.monitors .monitor .des {
+	width: 250px;
+	float: left;
+	line-height: 35px;
+}
+.monitors .monitor button {
+	width: 100px;
+}
+#fileinput {
+	margin-top: 20px;
+	width: 100%;
+}
+._react-file-reader-input {
+	float: right;
+	padding-top: 15px;
+}
+.symbol {
+	text-transform: uppercase;
+}
+.pool-info {
+	padding-top: 20px;
+	position: relative;
+	line-height: 50px;
+	text-align: center;
+}
+.pool-info .add-new{
+	position: absolute;
+	right: 10px;
+	top: 0;
+	margin-top: 15px;
+}
+.pool-info ul{
+	list-style: none;
+	padding: 0;
+}
+.pool-info ul li{
+	display: inline-block;
+	width: 100px;
+}
+.pool-info ul li div{
+	height: 25px;
+	line-height: 25px;
+}
+.pool-info .title{
+	font-weight: bold;
+}
+.navt0-basket {
+	width: 60%;
+	float: left;
+}
+.navt0-basket h3 {
+	text-align: center;
+}
+.symbol-not-allow {
+	width: 40%;
+	float: right;
+}
+.symbol-not-allow h3 {
+	text-align: center;
+}
+.acc-rate:hover > div i.edit-value{
+	display: block;
+}
+.acc-rate {
+	width: 120px;
+	padding: 0 8px !important;
+	line-height: 34px !important;
+}
+.acc-rate input {
+	margin: 0 !important;
+	width: 80px !important;
+	float: left !important;
+}
+.acc-rate i.edit-value {
+	cursor: pointer;
+	float: right;
+	line-height: 20px;
+	color: green;
+	display: none;
+	line-height: 34px !important;
+}

@@ -1,48 +1,50 @@
 <!-- nav -->
-<div class="header">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-5">
-				<!-- Logo -->
-				<div class="logo">
-					<h1><a href="/index">Express Administrator</a></h1>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="row">
-					<div class="col-lg-12">
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top" style=" border-radius: 0px; ">
+	
+	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+		aria-controls="navbar">
+		<span class="sr-only">Express Administrator</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</button>
+	<a class="navbar-brand" href="/index">
+		<b>Express Administrator</b>
+	</a>
 
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="navbar navbar-inverse" role="banner">
-					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
-						<ul class="nav navbar-nav">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-									<% if(user) { %>
-										<%= user.displayName %> <b class="caret"></b>
-									<% }else{ %>
-										Account <b class="caret"></b>
-									<% } %>
-								</a>
-								<ul class="dropdown-menu animated fadeInUp">
-									<% if (!user) { %>
-										<li><a href="/loginapi">Login</a></li>
-									<% } else { %>
-									<% if(user.role=='admin') { %>
-										<li><a href="/admin">Admin</a></li>
-									<% } %>
-									<li><a href="/Profile">Profile</a></li>
-									<li><a href="/logout">Logout</a></li>
-									<% } %>
-								</ul>
+	<div id="navbar" class="navbar-collapse collapse">
+		<ul class="nav navbar-nav pull-right">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+					<% if(user) { %>
+						<%= user.displayName %>
+					<% }else{ %>
+						Login
+					<% } %>
+						<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<% if (!user) { %>
+						<li>
+							<a href="/login">Login</a>
+						</li>
+					<% } else { %>
+						<% if(user.role=='admin') { %>
+							<li>
+								<a href="/admin">Admin</a>
 							</li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
+						<% } %>
+					<li>
+						<a href="/Profile">Profile</a>
+					</li>
+					<li>
+						<a href="/logout">Logout</a>
+					</li>
+					<% } %>
+				</ul>
+			</li>
+		</ul>
 	</div>
-</div>
+	<!--/.nav-collapse -->
+	
+</nav>

@@ -1,0 +1,37 @@
+<!-- Main menu -->
+<div class="sidebar content-box" style="display: block;">
+    <ul class="nav">
+        <!-- Main menu -->
+        
+        <li>
+            <a href="/home">
+                <i class="glyphicon glyphicon-home"></i> Homepage</a>
+        </li>
+        <% if(user.role=='admin'){ %>
+        <li>
+            <a href="/admin">
+                <i class="glyphicon glyphicon-eye-open"></i> User manager</a>
+        </li>
+        <li>
+            <a href="/admin/roles">
+                <i class="glyphicon glyphicon-tasks"></i> Roles manager</a>
+        </li>
+        <li>
+            <a href="/admin/log">
+                <i class="glyphicon glyphicon-th"></i> Logs manager</a>
+        </li>
+        <% } %>
+        <li>
+            <a href="/index">
+                <i class="glyphicon glyphicon-hand-right"></i>Index</a>
+        </li>
+        <li>
+            <a href="/timeline">
+                <i class="glyphicon glyphicon-hand-right"></i>Timeline</a>
+        </li>
+        <li>
+            <a href="/userwall">
+                <i class="glyphicon glyphicon-hand-right"></i>User Wall</a>
+        </li>
+    </ul>
+</div>

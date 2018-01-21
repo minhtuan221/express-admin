@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt');
 const utf8 = require('utf8');
 
 const {config,defaultUser} = require('../config');
+var {listpermit } = require('../config');
 var request = require('request');
 var fs = require('fs');
 
@@ -75,6 +76,7 @@ User.sync()
   })
 });
 
+// create default Role for first time running
 Role.sync()
 .then(() => {
   // Table created
@@ -332,7 +334,9 @@ exports.findAllRole=function (newrole,cb) {
 }
 
 exports.permit=function(allowed) {
-
+  if(listpermit.indexOf(allowed) == -1){
+    listpermit.push(allowed);
+  }
   const isAllowed = function(checkpermit,allowed) {
     // body...
     // console.log(checkpermit);

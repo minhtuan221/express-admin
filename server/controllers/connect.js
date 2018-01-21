@@ -9,6 +9,7 @@ var Q = require("q");
 
 var admin = require(path.resolve(__dirname,'../../db','users.js'));
 
+// example request an outside link/webpage
 //GET example to facebook webpage
 router.get('/facebook',
     admin.permit('view facebook'),

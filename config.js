@@ -14,7 +14,11 @@ var config = {
     displayName:'Minh Tuan',
     emails:'ntuan221@gmail.com',
     role:'admin'
-  }
+  },
+  listpermit: [
+    'admin'
+  ]
+
 }
 
 module.exports = config;

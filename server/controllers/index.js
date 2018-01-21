@@ -12,4 +12,9 @@ router.use('/connect',
     admin.ensureLoggedIn(),
     require('./connect'));
 
+// the router's example for rendering page with ensure-logined and permisson
+router.use('/',
+    admin.ensureLoggedIn(),
+    require('./example_routes'));
+
 module.exports = router;

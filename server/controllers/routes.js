@@ -6,8 +6,9 @@ var router = express.Router();
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var db = require(path.resolve(__dirname,'../../db','index.js'));
-var checklogin=db.users;
+var admin=db.users;
 const {config} = require('../../config');
+var {listpermit } = require('../../config');
 
 var request = require('request');
 var fs = require('fs');
@@ -17,42 +18,6 @@ const errorLog = require(path.resolve(__dirname,'../../','logger.js')).errorlog;
 const successlog = require(path.resolve(__dirname,'../../','logger.js')).successlog;
 
 
-const listPermit=[
-    'view accounts',
-    'view pools',
-    'view rules',
-    'view config',
-    'view pools t_plus',
-    'view tplus',
-    'view rooms',
-    'view aftype',
-    'view secinfo',
-    'view accounts tplus',
-    'view orsrules',
-
-    'edit tplus',
-    'edit accounts_pool',
-    'edit accounts_room',
-    'edit config',
-    'edit accounts',
-    'edit pools',
-    'edit aftype',
-    'edit orsrules',
-    'edit rooms',
-    'edit monitor',
-    'edit rules',
-
-    'download pools',
-    'download rooms',
-    'download accounts',
-
-    'delete tplus',
-    'delete rooms',
-    'delete pools',
-    'delete orsrules',
-    'delete rules',
-    'admin',
-  ];
 // Define routes.
 
 //basic landing page
@@ -63,7 +28,8 @@ router.get('/home',
   });
 
 router.get('/index',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
+  admin.permit('view index'),
   function(req, res) {
     res.render('index', { user: req.user });
 
@@ -71,7 +37,7 @@ router.get('/index',
 
 router.get('/login',
   function(req, res){
-    res.render('login',{message: req.query.message});
+    res.render('login', { user: req.user,message: req.query.message});
   });
 
 router.post('/login',
@@ -82,21 +48,44 @@ router.post('/login',
   });
 
 router.get('/logout',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   function(req, res){
     req.isAuthenticated=false;
     req.logout();
     res.redirect('/home');
   });
 
+router.get('/signup',
+  function (req, res) {
+    res.render('signup', { user: req.user, message: req.query.message });
+  });
+
+// signup code for example, not ready to use
+router.post('/signup',
+  function (req, res) {
+    db.users.findByUsername(req.body.username, function (error, user) {
+      // body...
+      if (!user) {
+
+        db.users.signupNewUser(req.body.username,'guest', function (error, result) {
+          // body...
+          console.log(error);
+          res.redirect('/home');
+        });
+      } else {
+        res.redirect('/signup?message=' + encodeURIComponent('User already exist!!'));
+      }
+    })
+  });
+
 router.get('/profile',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   function(req, res){
     res.render('profile', { user: req.user, message: req.query.message });
   });
 
 router.post('/profile/:username',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   function (req,res) {
     // check matching user...
     var username=req.params.username;
@@ -113,19 +102,19 @@ router.post('/profile/:username',
   });
 
 router.get('/profile/userinfo',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   function(req, res){
-    res.json(req.user);;
+    res.json(req.user); // example response with json
   });
 
 router.get('/error',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   function(req, res){
-    res.render('myerror', { message: req.query.message});
+    res.render('myerror', { user: req.user,message: req.query.message});
   });
 
 router.get('/admin',
-	checklogin.ensureLoggedIn(),
+	admin.ensureLoggedIn(),
   db.users.permit('admin'),
 	function(req,res){
     if(req.user.role==='admin'){
@@ -146,7 +135,7 @@ router.get('/admin',
 	});
 
 router.get('/admin/changerole',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req,res){
     // console.log(req.user.username+' va role la '+ req.user.role);
@@ -158,13 +147,12 @@ router.get('/admin/changerole',
 
     } else {
       res.redirect('/error?message=' + encodeURIComponent('You do not have permission!!'));
-      // res.redirect('/error');
     }
 
   });
 
 router.post('/admin/adduser',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req,res){
     // console.log(req.user.username+' va role la '+ req.user.role);
@@ -185,7 +173,7 @@ router.post('/admin/adduser',
   });
 
 router.get('/admin/roles',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req,res){
     // console.log(req.user.username+' va role la '+ req.user.role);
@@ -194,7 +182,7 @@ router.get('/admin/roles',
       // console.log(req.user);
       db.users.findAllRole('admin',function (error,myroles) {
         // body...
-        res.render('roles',{ allroles: myroles,message:'', user: req.user,listPermit:listPermit });
+        res.render('roles',{ allroles: myroles,message:'', user: req.user,listPermit:listpermit});
       });
 
     } else {
@@ -204,7 +192,7 @@ router.get('/admin/roles',
   });
 
 router.post('/admin/roles/add',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req,res){
       db.users.addNewRole(req.body.role,req.body.permission,function (error) {
@@ -216,7 +204,7 @@ router.post('/admin/roles/add',
   });
 
 router.get('/admin/roles/remove',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req,res){
       if (req.query.role!='admin') {
@@ -229,7 +217,7 @@ router.get('/admin/roles/remove',
   });
 
 router.get('/admin/roles/addpermit',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req,res){
       db.users.addNewRole(req.query.role,req.query.permit,function (error) {
@@ -240,7 +228,7 @@ router.get('/admin/roles/addpermit',
   });
 
 router.get('/admin/resetpassword/:userid',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function (req,res) {
     // check matching user...
@@ -260,7 +248,7 @@ router.get('/',
 //authentication from API
 router.get('/loginapi',
   function(req, res){
-    res.render('loginapi',{message: ''});
+    res.render('loginapi', { user: req.user ,message: ''});
   });
 
 // router.post('/loginapi',
@@ -279,8 +267,8 @@ router.post('/auth-api', function (req, res) {
         }
     },function(error, response, body) {
         if (!error && response.statusCode == 200) {
-            // res.send(body);
-            //tim username sau khi co token
+            // res.send(body); // send object contain token
+            // find user when have token
             db.users.findByUsername(req.body.username,function(error,user) {
               // body...
               if(user){
@@ -305,14 +293,14 @@ router.post('/auth-api', function (req, res) {
               }
             })
         } else {
-            // return res.sendStatus(500);
-            return res.render('loginapi',{message:'Wrong username or password'});
+            // return res.sendStatus(500); or
+          return res.render('loginapi', { user: req.user,message:'Wrong username or password'});
         }
     });
 });
 
 router.get('/admin/log',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req, res) {
     var logger=[]
@@ -328,11 +316,11 @@ router.get('/admin/log',
   });
 
 router.get('/admin/log/:logdate',
-  checklogin.ensureLoggedIn(),
+  admin.ensureLoggedIn(),
   db.users.permit('admin'),
   function(req, res) {
     var logger = []
-    const logdir = config.winston_dir;
+    const logdir = config.winston_dir+'/';
     var array = fs.readFileSync(logdir+req.params.logdate).toString().split("\n");
     for(i in array) {
       var timeVN=array[i].slice(11,24);
@@ -365,11 +353,11 @@ router.get('/admin/log/:logdate',
   });
 
 router.get('/admin/log/json/:logday',
-  // checklogin.ensureLoggedIn(),
-  // db.users.permit('admin'),
+  admin.ensureLoggedIn(),
+  db.users.permit('admin'),
   function(req, res) {
     var logger = [];
-    const logdir = config.winston_dir;
+    const logdir = config.winston_dir+'/';
     var logday=1;
     if (typeof req.params.logday===null) {
       return res.send("False parameters null => "+req.params.logday);

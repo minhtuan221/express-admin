@@ -35,6 +35,7 @@ app.engine('.html', require('ejs').__express);
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
+app.enable('trust proxy')
 
 
 // extend for user login auth

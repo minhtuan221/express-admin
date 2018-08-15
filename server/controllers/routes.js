@@ -10,6 +10,8 @@ var admin=db.users;
 const {config} = require('../../config');
 var {listpermit } = require('../../config');
 
+const { createPermitTable, convertToPermitTable} = require('./lib')
+
 var request = require('request');
 var fs = require('fs');
 const auth_api=config.auth_api;
@@ -182,7 +184,13 @@ router.get('/admin/roles',
       // console.log(req.user);
       db.users.findAllRole('admin',function (error,myroles) {
         // body...
-        res.render('roles',{ allroles: myroles,message:'', user: req.user,listPermit:listpermit});
+        res.render('roles', {
+          allroles: myroles,
+          message: '',
+          user: req.user,
+          listPermit: listpermit.sort(),
+          permitTable: createPermitTable(listpermit),
+        });
       });
 
     } else {

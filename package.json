@@ -32,7 +32,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startnode": "nodemon server.js"
+    "startnode": "nodemon app.js"
   },
   "author": "Tuan Nguyen Minh",
   "license": "MIT"

@@ -1,3 +1,4 @@
+var path = require('path');
 var config = {
   config:{
     db_dir:'../db_express',
@@ -17,8 +18,16 @@ var config = {
   },
   listpermit: [
     'admin'
-  ]
-
+  ],
+  database:{
+    db: "sqlite",
+    dbName: 'database.sqlite',
+    Url:'' // if not sqlite please specify all Url
+  }
 }
+const db_dir = path.resolve(__dirname, config.config.db_dir);
+if (config.database.db == "sqlite") {
+  config.database.Url = config.database.db + ':' + db_dir + '/'+ config.database.dbName
+} 
 
 module.exports = config;

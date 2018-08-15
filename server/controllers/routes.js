@@ -10,7 +10,7 @@ var admin=db.users;
 const {config} = require('../../config');
 var {listpermit } = require('../../config');
 
-const { createPermitTable, convertToPermitTable} = require('./lib')
+const { createPermitTable} = require('./lib')
 
 var request = require('request');
 var fs = require('fs');
@@ -31,7 +31,7 @@ router.get('/home',
 
 router.get('/index',
   admin.ensureLoggedIn(),
-  admin.permit('view index'),
+  admin.permit('guest'),
   function(req, res) {
     res.render('index', { user: req.user });
 
@@ -297,7 +297,7 @@ router.post('/auth-api', function (req, res) {
                       });
                    });
                 })
-                res.render('loginapi',{message:'Account verified! Please login again'})
+                res.render('loginapi',{user:null,message:'Account verified! Please login again'})
               }
             })
         } else {

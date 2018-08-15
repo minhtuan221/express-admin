@@ -1,13 +1,14 @@
 var path = require('path');
 var config = {
   config:{
+    secret: 'this is secret',
     db_dir:'../db_express',
     winston_dir:'../db_express/winston',
     morgan_dir:'../db_express/morgan',
     defaultValue:'123456',
     defaultEmail: '@gmail.com', // You can change to your own email-server
     // for user password. this is fixed because this project hasn't had function to send email yet.
-    auth_api:'https://auth-api.example.login'
+    auth_api: 'https://auth-api.vndirect.com.vn/staff/auth'
   },
   defaultUser:{
     username:'tuan.nguyenminh',

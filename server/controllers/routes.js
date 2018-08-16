@@ -69,7 +69,7 @@ router.post('/signup',
       // body...
       if (!user) {
 
-        db.users.signupNewUser(req.body.username,'guest', function (error, result) {
+        db.users.signupNewUser(req.body.username,config.normalUserRole, function (error, result) {
           // body...
           console.log(error);
           res.redirect('/home');

@@ -1,4 +1,13 @@
 var path = require('path');
+function makeid(dodai=6) {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  for (var i = 0; i < dodai; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 var config = {
   config:{
     secret: 'this is secret',
@@ -8,7 +17,9 @@ var config = {
     defaultValue:'123456',
     defaultEmail: '@gmail.com', // You can change to your own email-server
     // for user password. this is fixed because this project hasn't had function to send email yet.
-    auth_api: 'https://auth-api.vndirect.com.vn/staff/auth'
+    auth_api: 'https://auth-api.vndirect.com.vn/staff/auth',
+    normalUserRole: 'guest',
+    randomPassword: makeid,
   },
   defaultUser:{
     username:'tuan.nguyenminh',
@@ -18,7 +29,8 @@ var config = {
     role:'admin'
   },
   listpermit: [
-    'admin'
+    'admin',
+    'guest'
   ],
   database:{
     db: "sqlite",

@@ -140,7 +140,9 @@ exports.findByUsername = function(username, cb) {
 exports.signupNewUser=function (newusername,newrole,cb) {
   process.nextTick(function () {
     // body...
-    bcrypt.hash(config.defaultValue, 10, function(err, hash) {
+    let randompassword = config.randomPassword(6)
+    console.log(randompassword)
+    bcrypt.hash(randompassword, 10, function (err, hash) {
       User.bulkCreate([
         {
           username:newusername,
